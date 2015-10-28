@@ -7,6 +7,7 @@
 
 #include "node.h"
 
-Node::Node(int value) {
+template <class J>
+Node<J>::Node(J value) {
   this->value = value;
 }

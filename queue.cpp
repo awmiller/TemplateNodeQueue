@@ -14,7 +14,7 @@ Queue<T>::Queue() : count(0){
 }
 
 template <class T>
-Queue::~Queue() {
+Queue<T>::~Queue() {
   while(!isEmpty())
   {
     dequeue();
@@ -22,7 +22,7 @@ Queue::~Queue() {
 }
 
 template <class T>
-void Queue::enqueue(int value){
+void Queue<T>::enqueue(int value){
     
   if(this->isEmpty()){
       beginning = new Node(value);
@@ -38,10 +38,10 @@ void Queue::enqueue(int value){
 }
 
 template <class T>
-int Queue::dequeue(void){
+T Queue<T>::dequeue(void){
   if( this->isEmpty() )
   {
-      return EMPTY_VALUE;
+      return T();
   }
   
   int ret = beginning->value;
@@ -58,7 +58,7 @@ int Queue::dequeue(void){
 }
 
 template <class T>
-int Queue::front(void){
+T Queue<T>::front(void){
   if(this->isEmpty()){
       return EMPTY_VALUE;
   }
@@ -66,12 +66,12 @@ int Queue::front(void){
 }
 
 template <class T>
-bool Queue::isEmpty(void){
+bool Queue<T>::isEmpty(void){
   return (count == 0);
 }
 
 template <class T>
-int Queue::size(void){
+int Queue<T>::size(void){
   return count;
 }
 

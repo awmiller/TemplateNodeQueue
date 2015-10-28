@@ -8,11 +8,12 @@
 #ifndef NODE_H
 #define	NODE_H
 
+template <class J>
 class Node {
 public:
     Node(int value);
     Node *next;
-    int value;
+    J value;
 };
 
 #endif	/* NODE_H */
