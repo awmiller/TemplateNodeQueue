@@ -22,7 +22,7 @@ Queue<T>::~Queue() {
 }
 
 template <class T>
-void Queue<T>::enqueue(int value){
+void Queue<T>::enqueue(T value){
     
   if(this->isEmpty()){
       beginning = new Node(value);
