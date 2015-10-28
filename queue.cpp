@@ -7,12 +7,13 @@
 #include "queue.h"
 #include <cstdlib>
 
-Queue::Queue() : count(0){
+template <class T>
+Queue<T>::Queue() : count(0){
   end = NULL;
   beginning = end;
 }
 
-
+template <class T>
 Queue::~Queue() {
   while(!isEmpty())
   {
@@ -20,6 +21,7 @@ Queue::~Queue() {
   }
 }
 
+template <class T>
 void Queue::enqueue(int value){
     
   if(this->isEmpty()){
@@ -35,6 +37,7 @@ void Queue::enqueue(int value){
   count ++;
 }
 
+template <class T>
 int Queue::dequeue(void){
   if( this->isEmpty() )
   {
@@ -54,6 +57,7 @@ int Queue::dequeue(void){
   return ret;
 }
 
+template <class T>
 int Queue::front(void){
   if(this->isEmpty()){
       return EMPTY_VALUE;
@@ -61,10 +65,12 @@ int Queue::front(void){
   return beginning->value;
 }
 
+template <class T>
 bool Queue::isEmpty(void){
   return (count == 0);
 }
 
+template <class T>
 int Queue::size(void){
   return count;
 }

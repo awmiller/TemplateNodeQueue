@@ -11,19 +11,20 @@
 
 #define EMPTY_VALUE -1
 
+template <class T>
 class Queue {
 public:
     Queue();
     ~Queue();
     void enqueue(int value);
-    int dequeue(void);
-    int front(void);
+    T dequeue(void);
+    T front(void);
     bool isEmpty(void);
     int size(void);
     
 private:
 
-    Node *beginning,*end;
+    Node<T> *beginning,*end;
     int count;
 };
 
