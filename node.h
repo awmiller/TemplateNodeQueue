@@ -11,10 +11,15 @@
 template <class J>
 class Node {
 public:
-    Node(int value);
+    Node(J value);
     Node *next;
     J value;
 };
+
+template <class J>
+Node<J>::Node(J value) {
+  this->value = value;
+}
 
 #endif	/* NODE_H */
 
