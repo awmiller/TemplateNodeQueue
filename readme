@@ -1,0 +1,184 @@
+Proof that it ran:
+______________________________________________________________________________________________
+
+andrew@andrew-VirtualBox:~/projs$ cd TemplateNodeQueue/
+andrew@andrew-VirtualBox:~/projs/TemplateNodeQueue$ ls
+driver    main.o    node.cpp  queue.cpp  template_test.cpp  template_test.o
+main.cpp  makefile  node.h    queue.h    template_test.h
+andrew@andrew-VirtualBox:~/projs/TemplateNodeQueue$ cat node.*
+/* 
+ * Andrew Miller
+ * 915113828
+ * amiller2@sfsu.edu
+ * gcc version 4.9.3 (GCC)
+ */
+
+#include "node.h"
+
+
+/* 
+ * Andrew Miller
+ * 915113828
+ * amiller2@sfsu.edu
+ * gcc version 4.9.3 (GCC)
+ */
+
+#ifndef NODE_H
+#define	NODE_H
+
+template <class J>
+class Node {
+public:
+    Node(J value);
+    Node *next;
+    J value;
+};
+
+template <class J>
+Node<J>::Node(J value) {
+  this->value = value;
+}
+
+#endif	/* NODE_H */
+
+andrew@andrew-VirtualBox:~/projs/TemplateNodeQueue$ cat queue.h
+/* 
+ * Andrew Miller
+ * 915113828
+ * amiller2@sfsu.edu
+ * gcc version 4.9.3 (GCC)
+ */
+
+#ifndef QUEUE_H
+#define	QUEUE_H
+#include "node.h"
+
+#define EMPTY_VALUE -1
+
+template <class T>
+class Queue {
+public:
+    Queue();
+    ~Queue();
+    void enqueue(T value);
+    T dequeue(void);
+    T front(void);
+    bool isEmpty(void);
+    int size(void);
+    
+private:
+
+    Node<T> *beginning,*end;
+    int count;
+};
+
+
+#include <cstdlib>
+
+template <class T>
+Queue<T>::Queue() : count(0){
+  end = NULL;
+  beginning = end;
+}
+
+template <class T>
+Queue<T>::~Queue() {
+  while(!isEmpty())
+  {
+    dequeue();
+  }
+}
+
+template <class T>
+void Queue<T>::enqueue(T value){
+    
+  if(this->isEmpty()){
+      beginning = new Node<T>(value);
+      end = beginning;
+  }
+  else
+  {
+      end->next = new Node<T>(value);
+      end = end->next;
+  }
+  
+  count ++;
+}
+
+template <class T>
+T Queue<T>::dequeue(void){
+  if( this->isEmpty() )
+  {
+      return T();
+  }
+  
+  T ret = beginning->value;
+
+  Node<T> *toBeDestroyed = beginning;
+  
+  beginning = beginning->next;
+
+  delete(toBeDestroyed);
+    
+  count --;
+	
+  return ret;
+}
+
+template <class T>
+T Queue<T>::front(void){
+  if(this->isEmpty()){
+      return EMPTY_VALUE;
+  }
+  return beginning->value;
+}
+
+template <class T>
+bool Queue<T>::isEmpty(void){
+  return (count == 0);
+}
+
+template <class T>
+int Queue<T>::size(void){
+  return count;
+}
+
+
+
+#endif	/* QUEUE_H */
+
+andrew@andrew-VirtualBox:~/projs/TemplateNodeQueue$ ./driver 
+Creating TemplateTest
+--- Testing queue is not empty ---
+PASS
+
+--- Testing queue size is 30 ---
+PASS
+
+--- Testing queue front is 2421 ---
+PASS
+
+--- Testing queue size is 30 ---
+PASS
+
+--- Testing dequeue should be 2421 ---
+PASS
+
+--- Testing queue size is 29 ---
+PASS
+
+--- Testing queue front is 4072 ---
+PASS
+
+--- Testing clearing the queue (isEmpty and dequeue) ---
+PASS
+
+--- Testing queue is empty ---
+PASS
+
+--- Testing default value returned when dequeue called on empty Queue ---
+PASS
+
+Destroyed TemplateTest
+andrew@andrew-VirtualBox:~/projs/TemplateNodeQueue$ 
+
